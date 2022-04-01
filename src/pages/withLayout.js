@@ -1,38 +1,51 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 
 function withLayout(Component) {
     function Layout(){
+        const location = useLocation();
+        const[activeNav, setActiveNav] = useState("home")
 
- 
- 
- 
-    return (
-    <div className='layout'>
-    <header className='appbar'>
-    <span>Logo</span>
-    <div>
-    <nav>
-    <span className='nav-Link'> <Link to="/">Home</Link></span>
-    <span className='nav-Link'> <Link to="/">About</Link></span>
-    <span className='nav-Link'> <Link to="/">Blog</Link></span>
-    </nav>
-    </div>
-    </header>
+        useEffect(()=>{
+            let currentLoc = location.pathname.split("/")
+            let current = currentLoc[1];
+            switch (current){
+                case "about":
+                    setActiveNav("blog");
+                    break;
+                    default:
+                        setActiveNav("home");
+                        break;
+            }
+        }, [location.pathname])
 
-    <main className='main-component'>
-    <Component/>
-    </main>
-    
-    
-    
+        return(
+            <div className='layout'>
 
-    <footer>&copy; 2022 PreMest</footer>
-    
-      
-    </div>
-    )
+            <header className='appbar'>
+            <span>Logo</span>
+            <div>
+            <nav>
+            <span className={`nav-link ${activeNav === "home" ? "active" : ""}`}><Link to="/">Home</Link></span>
+            <span className={`nav-link ${activeNav === "about" ? "active" : ""}`}><Link to="/about">About</Link></span>
+            <span className={`nav-link ${activeNav === "blog" ? "active" : ""}`}><Link to="/blog">Blog</Link></span>
+            </nav>
+            </div>
+            </header>
+
+            <main className='main-component'>
+            <Component/>
+            </main>
+
+            <footer>&copy; 2022 PreMest</footer>
+            </div>
+        )
     }
+    
+
+
+
+
   return Layout
 }
 

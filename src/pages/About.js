@@ -1,10 +1,10 @@
 import React from 'react'
 import withLayout from './withLayout'
 
-function home() {
+function About() {
   return (
     <div>
-    <h1>Welcome to my home page</h1>
+    <h1>Welcome to my about page</h1>
     <div>
     <p>Kane was cast in The Fading Light by the director Ivan Kavanagh after he spotted her in a short film, 
     July, that was posted on YouTube.[3] She was chosen partly for her successful experience with
@@ -31,4 +31,4 @@ function home() {
   )
 }
 
-export default withLayout (home)
+export default withLayout (About)
